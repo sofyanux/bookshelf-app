@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBookshelf</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header-app">
+        <div class="title">
+            <img src="" alt="">
+            <h2>MyBookshelf</h2>
+        </div>
+    </header>
+    <main class="content-app">
+        <section class="input-section" id="inputSection">
+            <div class="input-title">
+                <h1>Tambah Buku</h1>
+            </div>
+            <form id="inputBook">
+                <div class="item col">
+                    <label for="bookTitle">Judul:</label>
+                    <input type="text" id="bookTitle" placeholder="Belajar Front End Web Dicoding" required>
+                </div>
+                <div class="item col">
+                    <label for="bookAuthor">Penulis:</label>
+                    <input type="text" id="bookAuthor" placeholder="Dicoding Indonesia" required>
+                </div>
+                <div class="item col">
+                    <label for="bookYear">Tahun:</label>
+                    <input type="number" id="bookYear" placeholder="2023" required>
+                </div>
+                <div class="item col">
+                    <label for="bookIsCompleteRead">Sudah dibaca?</label>
+                    <input type="checkbox" id="bookIsCompleteRead">
+                </div>
+                <button type="submit">Simpan ke Rak Buku</button>
+            </form>
+        </section>
+        <section class="bookshelf-section">
+            <div class="bookshelf-filter">
+                <button class="filter-book filter-active" onclick="filterBook('all')">
+                    <img src="" alt="">
+                    <p>Semua Buku</p>
+                    <span id="countAll">0</span>
+                </button>
+                <button class="filter-book filter-active" onclick="filterBook('inCompleteBook')">
+                    <img src="" alt="">
+                    <p>Belum Dibaca</p>
+                    <span id="countInComplete">0</span>
+                </button>
+                <button class="filter-book filter-active" onclick="filterBook('completeBook')">
+                    <img src="" alt="">
+                    <p>Sudah Dibaca</p>
+                    <span id="countComplete">0</span>
+                </button>
+            </div>
+            <div class="search-book">
+                <label for="searchBook">
+                    <img src="" alt="">
+                </label>
+                <input type="text" id="searchBook" placeholder="Cari Buku...">
+            </div>
+            <div class="bookshelf-list">
+                <div id="inCompleteBookshelf" class="bookshelf-item">
+                    <h3>Belum Selesai Dibaca</h3>
+                    <div id="inCompleteBookList" class="book-list"></div>
+                </div>
+                <div id="CompleteBookshelf" class="bookshelf-item">
+                    <h3>Belum Selesai Dibaca</h3>
+                    <div id="CompleteBookList" class="book-list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
