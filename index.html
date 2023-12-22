@@ -1,86 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBookshelf</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="header-app">
-        <div class="title">
-            <img src="" alt="">
-            <h2>MyBookshelf</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookshelf App</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="nav">
+        <h1 class="App">Bookshelf App</h1>
+        <input
+          class="search"
+          placeholder="Cari berdasarkan judul buku..."
+          type="text"
+          id="searchQuery"
+          oninput="searchBooks()"
+        />
+      </div>
+
+      <div id="notification" class="notification"></div>
+
+      <form id="bookForm" class="bookForm">
+        <label for="title">Judul:</label>
+        <input class="input" type="text" id="title" required />
+
+        <label for="author">Penulis:</label>
+        <input class="input" type="text" id="author" required />
+
+        <label for="year">Tahun:</label>
+        <input class="input" type="number" id="year" required />
+
+        <div class="isComplete">
+          <input type="checkbox" id="isComplete" />
+          <label for="isComplete">Sudah selesai dibaca?</label>
         </div>
-    </header>
-    <main class="content-app">
-        <section class="input-section" id="inputSection">
-            <div class="input-title">
-                <h1>Tambah Buku</h1>
-            </div>
-            <form id="inputBook">
-                <div class="item col">
-                    <label for="bookTitle">Judul:</label>
-                    <input type="text" id="bookTitle" placeholder="Belajar Front End Web Dicoding" required>
-                </div>
-                <div class="item col">
-                    <label for="bookAuthor">Penulis:</label>
-                    <input type="text" id="bookAuthor" placeholder="Dicoding Indonesia" required>
-                </div>
-                <div class="item col">
-                    <label for="bookYear">Tahun:</label>
-                    <input type="number" id="bookYear" placeholder="2023" required>
-                </div>
-                <div class="item col">
-                    <label for="bookIsCompleteRead">Sudah dibaca?</label>
-                    <input type="checkbox" id="bookIsCompleteRead">
-                </div>
-                <button type="submit">Simpan ke Rak Buku</button>
-            </form>
-        </section>
-        <section class="bookshelf-section">
-            <div class="bookshelf-filter">
-                <button class="filter-book filter-active" onclick="filterBook('all')">
-                    <img src="" alt="">
-                    <p>Semua Buku</p>
-                    <span id="countAll">0</span>
-                </button>
-                <button class="filter-book filter-active" onclick="filterBook('inCompleteBook')">
-                    <img src="" alt="">
-                    <p>Belum Dibaca</p>
-                    <span id="countInComplete">0</span>
-                </button>
-                <button class="filter-book filter-active" onclick="filterBook('completeBook')">
-                    <img src="" alt="">
-                    <p>Sudah Dibaca</p>
-                    <span id="countComplete">0</span>
-                </button>
-            </div>
-            <div class="search-book">
-                <label for="searchBook">
-                    <img src="" alt="">
-                </label>
-                <input type="text" id="searchBook" placeholder="Cari Buku...">
-            </div>
-            <div class="bookshelf-list">
-                <div id="inCompleteBookshelf" class="bookshelf-item">
-                    <h3>Belum Selesai Dibaca</h3>
-                    <div id="inCompleteBookList" class="book-list"></div>
-                </div>
-                <div id="CompleteBookshelf" class="bookshelf-item">
-                    <h3>Belum Selesai Dibaca</h3>
-                    <div id="CompleteBookList" class="book-list"></div>
-                </div>
-            </div>
-        </section>
-    </main>
+
+        <button class="submit" type="button" onclick="addBook()">Add Book</button>
+      </form>
+
+      <h2>Belum Selesai Dibaca</h2>
+      <div class="bookshelf" id="unfinishedBookshelf"></div>
+
+      <h2>Selesai Dibaca</h2>
+      <div class="bookshelf" id="finishedBookshelf"></div>
+
+      <div id="confirmationPopup">
+          <div class="header">
+              <h3>Hapus Buku</h3>
+          </div>
+        <p class="text">Apakah kamu yakin ingin menghapus buku ini?</p>
+        <div class="btn">
+            <button class="buttonEdit" id="confirmDelete" onclick="confirmDelete()">Iya, Hapus!</button>
+            <button class="buttonDelete" id="cancelDelete" onclick="cancelDelete()">Batalkan</button>
+        </div>
+      </div>
+
+      <div id="editPopup">
+        <div class="header">
+            <h3>Edit Buku</h3>
+        </div>
+        <label for="editTitle">Judul:</label>
+        <input class="input" type="text" id="editTitle" required />
+
+        <label for="editAuthor">Penulis:</label>
+        <input class="input" type="text" id="editAuthor" required />
+
+        <label for="editYear">Tahun:</label>
+        <input class="input" type="number" id="editYear" required />
+
+        <div class="editIsComplete">
+          <input type="checkbox" id="editIsComplete" />
+          <label for="editIsComplete">Sudah selesai dibaca?</label>
+        </div>
+
+        <div class="btn">
+            <button class="buttonEdit" onclick="confirmEdit()">Simpan</button>
+            <button class="buttonDelete" onclick="cancelEdit()">Batalkan</button>
+        </div>
+      </div>
+      <div class="overlay" id="overlay" onclick="closePopups()"></div>
+    </div>
+
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
+  </body>
 </html>
