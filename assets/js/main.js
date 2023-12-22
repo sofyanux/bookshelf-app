@@ -22,7 +22,7 @@ function addBook() {
     id: Date.now(),
     title: title,
     author: author,
-    year: year,
+    year: parseInt(year, 10),
     isComplete: isComplete,
   };
 
@@ -139,7 +139,7 @@ function confirmDelete() {
   document.getElementById("confirmationPopup").style.display = "none";
 
   localStorage.setItem("books", JSON.stringify(updatedBooks));
-  
+
   renderBooks();
   showNotification("Buku berhasil dihapus!");
 }
@@ -189,7 +189,6 @@ function confirmEdit() {
   closePopups();
   showNotification("Buku berhasil diperbarui!");
 }
-
 
 function cancelEdit() {
   document.getElementById("overlay").style.display = "none";
